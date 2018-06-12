@@ -16,6 +16,7 @@ const BookType = new GraphQLObjectType({
         author: {
             type: AuthorType,
             resolve(parent, args) {
+                return Author.findById(parent.authorId)
                 //return _.find(authors, { id: parent.authorId })
             }
         }
@@ -31,6 +32,7 @@ const AuthorType = new GraphQLObjectType({
         book: {
             type: new GraphQLList(BookType),
             resolve(parent, args) {
+                return Book.find({ authorId: parent.id })
                 // return _.filter(books, { authorId: parent.id })
             }
         }
@@ -44,6 +46,7 @@ const RootQuery = new GraphQLObjectType({
             type: BookType,
             args: { id: { type: GraphQLID } },
             resolve(parent, args) {
+                return Book.findById(args.id);
                 // code to get data from db
                 // return _.find(books, { id: args.id })
             }
@@ -52,19 +55,20 @@ const RootQuery = new GraphQLObjectType({
             type: AuthorType,
             args: { id: { type: GraphQLID } },
             resolve(parent, args) {
+                return Author.findById(args.id);
                 //return _.find(authors, { id: args.id })
             }
         },
         books: {
             type: new GraphQLList(BookType),
             resolve(parent, args) {
-                return books
+                return Book.find({})
             }
         },
         authors: {
             type: new GraphQLList(AuthorType),
             resolve(parent, args) {
-                return authors
+                return Author.find({})
             }
         }
     }
