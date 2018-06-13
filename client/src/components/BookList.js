@@ -7,11 +7,15 @@ const getBooksQuery = gql`
       books{
           name
           genre
+          author{
+              name
+          }
       }
   }
 `
 
 class BookList extends Component {
+    
     displayBooks() {
         var data = this.props.data;
         if (data.loading) {
@@ -26,6 +30,7 @@ class BookList extends Component {
     }
 
     render() {
+        console.log(this.props)
         return (
             <div>
                 <ul id="book-list">
