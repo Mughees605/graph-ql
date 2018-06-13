@@ -2,7 +2,7 @@ const graphql = require('graphql');
 const _ = require('lodash');
 const { Client } = require('pg');
 
-const connectionString = 'postgres://dbuser:dbUser321@auroradb.cu311zl9hdtl.us-east-1.rds.amazonaws.com:5432/test'
+const connectionString = ''
 const client = new Client({
     connectionString,
 })
